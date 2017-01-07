@@ -21,14 +21,14 @@ RUN chmod 755 /couchpotato.sh
 
 RUN export VERSION=3.0.1 \
     && apt-get -q update \
-    && apt-get install -qy curl ca-certificates python-pip python-dev libz-dev libxml2-dev libxslt1-dev gcc \
+    && apt-get install -qy curl ca-certificates python-pip python-dev libz-dev libxml2-dev libxslt-dev gcc \
     && curl -o /tmp/couchpotato.tar.gz https://codeload.github.com/CouchPotato/CouchPotatoServer/tar.gz/build/${VERSION} \
     && tar xzf /tmp/couchpotato.tar.gz \
     && mv CouchPotatoServer-* couchpotato \
     && chown -R couchpotato: couchpotato \
     && pip install cheetah lxml pyopenssl \
-    && apt-get -y remove curl python-dev libz-dev libxml2-dev libxslt1-dev gcc \
-    && apt-get -y autoremove \
+#    && apt-get -y remove curl python-dev libz-dev libxml2-dev libxslt1-dev gcc \
+#    && apt-get -y autoremove \
     && apt-get -y clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/*
@@ -37,7 +37,7 @@ RUN export VERSION=3.0.1 \
 # Define container settings.
 #
 
-VOLUME ["/datadir", "/media"]
+VOLUME ["/datadir", "/media", "/storage"]
 
 EXPOSE 5050
 
